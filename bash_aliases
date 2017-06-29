@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 ### sudo hack: so you can use custom aliases as sudo
 ###
@@ -129,8 +130,9 @@ alias push-please="git push --force-with-lease"
 # Others
 alias restart="source ~/.bashrc"
 
-function pyvenv() {
-  source ~/venv/pyvenv/bin/activate
+function pyenv() {
+  virtualenv ~/venv/pyenv -p python2.7
+  source ~/venv/pyenv/bin/activate
   pip install -U pip ; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 }
 
