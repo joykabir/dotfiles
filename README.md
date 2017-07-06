@@ -1,46 +1,62 @@
-# My dotfiles
+## DOTFILES
 
-Bash configuration files formally called as dotfiles intended for my use and backup.
+Bash configuration files that I use for MacOS and backup in this repo.
 
-# Usage
+### Contents
 
-Clone the repository in your `HOME(~)` folder.
+1. `bashrc`
 
-    cd ~
-    git clone git@github.com:joykabir/dotfiles.git
+   Bash config file excuted both for login and non-login shells.
+   This file sources other dot files. Read this well-written blog
+   about [bash configurations.](http://dghubble.com/blog/posts/.bashprofile-.profile-and-.bashrc-conventions/)
 
-While in home path, create a file `.bashrc` with the following content:
+2. `bash_profile`
 
-    source ~/dotfiles/dot/bashrc
+   Contains PATH variable settings and sources `.bashrc` file.
 
-And another file `.bash_profile` with the following content:
+3. `bash_aliases`
 
-    PATH=/usr/local/bin:$PATH
-    PATH=$HOME/bin:$PATH
-    export PATH
+    Contains all of my utility aliases
 
-  	if [ -f ~/.bashrc ];
-  	then
-  	    source ~/.bashrc
-  	fi
+4. `bash_prompt`
 
-Type `restart` and hit enter from bash.
+    Contains color and font settings for the bash prompt. This works
+    best on white background (I prefer white).
 
-# Contents
+5. `gitconfig`
 
-* git completion
-* git branch parse
-* smart bash colors for white background(I prefer white)
-* `weather <city name>` shows weather
-* `myip` shows your ip
-* `up` goes one folder up (cd ..)
-* `restart` sources .bashrc
-* `space` shows available disk space in current path
-* `used` shows used dick space in current path
-* `update` upgrades installed packages via brew
-* `lsm` executes ls -la
-* `pyenv` activates python 2.7 virutalenv called **pyenv** and
-  upgrades all installed packages. Assumes that virualenv is already
-  installed.
+    The global git config file that should be placed in home path
 
-      pip install virtualenv
+6. `gitignore`
+
+    Global git ignore file should be palced in home path.
+
+7. `install.sh`
+
+    Install script that creates symbolic links to the above dot files. The script
+    backups existing dot files.
+
+### Usage
+
+Clone the repository in a preferred location. Run the install.sh that will create
+dotfiles in home path and will add symbolic links.
+
+    ./install.sh OR bash install.sh
+
+
+### Note
+
+Get the git-completion.bash file and copy in home folder before
+install.sh is executed. The `.bashrc` file sources the `git-completion.bash` file.
+
+    wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+
+### Acknowledgement
+
+* https://github.com/sebdah/dotfiles
+* https://github.com/mathiasbynens/dotfiles
+
+### Warning
+
+The codes should be reviewed first. The scripts should not be used without knowing what they entail.

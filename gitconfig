@@ -1,0 +1,133 @@
+# Source Acknowledgements:
+# https://github.com/alikins/gitconfig/blob/master/gitconfig
+# https://github.com/sebdah/dotfiles/blob/master/gitconfig
+
+[color]
+    ui = true
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta
+    plain = white bold
+    old = red bold
+    new = green bold
+    commit = yellow bold
+    func = green dim
+    plain = white bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+
+[merge]
+    tool = diffuse
+	  conflictstyle = diff3
+    log = true
+    branchdesc = true
+
+[push]
+    default = current
+
+[status]
+    relativePaths = true
+    showUntrackedFiles = no
+    submodulesummary = true
+
+[github]
+    user = joykabir
+[user]
+    name = Zia Kab
+    email = joykabir@gmail.com
+
+[alias]
+
+    # commits not pushed to $1, master by default
+    unpushed = cherry -v
+
+    # what branch contains the sha
+    contains = branch --contains
+
+    # show a list of tags sorted by when they were tagged
+    tagage = !sh -c 'git for-each-ref --sort=taggerdate refs/tags --format=\"%(refname:short)\"'
+
+    # https://github.com/prabirshrestha/ProfilesAndSettings/blob/master/.gitconfig
+    # show tags and any tag annotation (tito adds tag annotations for example)
+    tags = tag -n1 -l
+
+    # url of origin, about 99% of what I use git config --list for
+    cloneurl = config --get remote.origin.url
+    l = log --no-merges
+
+    # because I always typo git commit --ammend, er, amend
+    amend = commit --amend
+    ammend = amend
+
+    send-note = send-email --annotate
+
+    # various pretty loggers from various places
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    lc = log ORIG_HEAD.. --stat --no-merges
+    # from http://blog.kfish.org/2010/04/git-lola.html
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ll = log --graph --date=short
+
+    # from git-extras https://github.com/tj/git-extras/blob/master/bin/git-show-tree
+    show-tree = log --all --graph --decorate --oneline --simplify-by-decoration
+
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+
+    # ignore po files in "git log", sorry translators ;-<
+    slog = !sh -c 'git log --no-merges $1 `ls | grep -v ^po`' -
+
+    # http://serverfault.com/questions/175052/how-to-tell-which-local-branch-is-tracking-which-remote-branch-in-git
+    upstream = rev-parse --symbolic-full-name --abbrev-ref HEAD@{upstream}
+
+    # also from http://serverfault.com/questions/175052/how-to-tell-which-local-branch-is-tracking-which-remote-branch-in-git
+    # tbranch = branch -vv
+
+    # what got pushed to master in the last hour
+    # based on http://stackoverflow.com/questions/3357219/expose-the-date-a-commit-was-pushed-to-a-repository
+    # justpushed = log origin/master@{\"1 hour ago\"}..origin/master --
+
+    # search for a pattern in branch names, file names, or file contents
+    #find = "!f() { ((git branch -a ; git ls-files) | grep $1); git grep $1 }; f"
+    find = "!f() { (git branch -a ; git ls-files) | grep $1; GIT_PAGER=cat git grep $1; }; f"
+
+    # show what tag/release a bug was part of
+    # bugrelease = "!sh -c 'git name-rev --tags --name-only  $(git log --grep ^$1: --pretty=\"format:%H\"\n")' -
+
+    # from https://gist.github.com/492227
+    lost = "!git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
+
+    # show a list of branches sorted by time of last commit.
+    # This is in a seperate script now.
+    # brage = "!f() { git for-each-ref --sort=committerdate refs/heads $1  --format=\"%(refname:short)\" ; }; g() { for C in $(f $1) ; do git show -s --pretty=format:\"%Cgreen%ci %Cblue%cr%Creset  $C\" \"$C\" -- ; done; }; g "
+
+    # show a list of every branch and show their latests commit, sorted by last commit
+    brlog = "!sh -c 'for C in $(git for-each-ref --sort=committerdate refs/heads --format=\"%(refname:short)\") ; do git show  -s --pretty=format:\"%Cgreen%ci %Cblue%cr%Creset  $C\" \"$C\" -- ; git show --stat -s $C ; echo; done'"
+    brlogremote = "!sh -c 'for C in $(git for-each-ref --sort=committerdate refs/remotes/origin --format=\"%(refname:short)\") ; do git show  -s --pretty=format:\"%Cgreen%ci %Cblue%cr%Creset  $C\" \"$C\" -- ; git show --stat -s $C ; echo; done'"
+
+    # show a list of files with bug fixes in them, sorted by popularity of occurance
+    #  aka, list the buggy files
+    # FIXME: should probably make all the bug regex stuff scripts so it's easier to customize
+    buggyfiles = "!git log -M -C --format=\"format:%n\" --grep=\"^[[:digit:]]\\+:\" --name-only | grep .  | sort | uniq -c | sort -n"
+
+    # based on "buggyfiles" above and https://github.com/cypher/dotfiles/blob/master/bin/git-churn
+    churn = !git log -M -C --name-only --format=\"format:%n\" | grep . | sort | uniq -c | sort -n
+
+      # find what commit a file was added
+    # usage: `git whatadded --foo.c`
+    whatadded = log --follow --diff-filter=A --find-renames=40%
+
+    # checkout a tag into a branch
+    checkout-tag = "!f() { tagname=${1}; branchname='${tagname}-branch'; git checkout -b '${branchname}' '${tagname}'; } ; f"
+
+[core]
+	excludesfile = ${HOME}/.gitignore
