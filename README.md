@@ -1,9 +1,9 @@
-## DOTFILES
-
+DOTFILES
+=========
 Bash configuration files that I use for MacOS and backup in this repo.
 
-### Contents
-
+Contents
+--------
 1. `bashrc`
 
    Bash config file excuted both for login and non-login shells.
@@ -36,27 +36,31 @@ Bash configuration files that I use for MacOS and backup in this repo.
     Install script that creates symbolic links to the above dot files. The script
     backups existing dot files.
 
-### Usage
-
+Usage
+-------
 Clone the repository in a preferred location. Run the install.sh that will create
 dotfiles in home path and will add symbolic links.
+```
+./install.sh OR bash install.sh
+```
 
-    ./install.sh OR bash install.sh
-
-
-### Note
+Notes
+------
 
 Get the git-completion.bash file and copy in home folder before
 install.sh is executed. The `.bashrc` file sources the `git-completion.bash` file.
 
-    wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+```
+wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+```
 
-
-### Acknowledgement
+Acknowledgement
+---------------
 
 * https://github.com/sebdah/dotfiles
 * https://github.com/mathiasbynens/dotfiles
 
-### Warning
+Warning
+--------
 
-The codes should be reviewed first. The scripts should not be used without knowing what they entail.
+The scripts should not be used without knowing what they entail.
