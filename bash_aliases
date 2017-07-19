@@ -195,3 +195,9 @@ find_file_down() {
 
 alias gl=golem_lint
 alias gt=golem_test
+
+# Pip global install
+gpip() {
+    PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+

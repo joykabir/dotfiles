@@ -8,6 +8,9 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
+# Make sure pip packages are installed in virtualenv
+export PIP_REQUIRE_VIRTUALENV=true
+
 # Export Sublime text editor as default
 # Before that download and install sublime
 # And set as default OS Terminal editor
