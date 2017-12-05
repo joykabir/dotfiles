@@ -111,8 +111,8 @@ alias bc='bc -l'
 
 # My python virtualenv
 function cvenv() {
-  cd ~/ebdev/cd-develop/aws_scripts/Golem
-  source ~/venv/cd/bin/activate
+  cd ~/ebwork/cd-develop/aws_scripts/Golem
+  source ~/venv/cd-aws/bin/activate
   pip install -U pip ; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 }
 

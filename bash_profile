@@ -2,11 +2,7 @@
 # Bash profile for login shells
 # Mainly intended for MacOS.
 
-# Path
-export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # Make sure pip packages are installed in virtualenv
 export PIP_REQUIRE_VIRTUALENV=true
